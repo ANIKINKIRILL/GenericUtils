@@ -1,9 +1,9 @@
 package com.anikinkirill.mviplayground.util
 
 data class DataState<T>(
-    var error: Event<StateError>? = null,
-    var loading: Loading = Loading(false),
-    var data: Data<T>? = null
+    var error: Event<StateError>? = null,       // Event and StateError from StateResource helper class
+    var loading: Loading = Loading(false),      // Loading from StateResource helper class
+    var data: Data<T>? = null                   // Data from StateResource helper class
 ) {
 
     companion object {
