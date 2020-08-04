@@ -1,23 +1,25 @@
 package com.anikinkirill.mviplayground.util
 
 data class DataState<T>(
-    var message: String? = null,
-    var loading: Boolean = false,
-    var data: T? = null
+    var error: Event<StateError>? = null,
+    var loading: Loading = Loading(false),
+    var data: Data<T>? = null
 ) {
 
     companion object {
-        fun <T> error(message: String) : DataState<T> {
-            return DataState(message, false, null)
+
+        fun <T> error(response: Response) : DataState<T> {
+            return DataState(error = Event(StateError(response)))
         }
 
-        fun <T> loading(isLoading: Boolean) : DataState<T> {
-            return DataState(null, isLoading, null)
+        fun <T> loading(isLoading: Boolean, cachedData: T? = null) : DataState<T> {
+            return DataState(null, Loading(isLoading), Data(Event.dataEvent(cachedData), null))
         }
 
-        fun <T> data(message: String? = null, data: T? = null) : DataState<T> {
-            return DataState(message, false, data)
+        fun <T> data(data: T? = null, response: Response? = null) : DataState<T> {
+            return DataState(null, Loading(false), Data(Event.dataEvent(data), Event.responseEvent(response)))
         }
+
     }
 
 }
