@@ -1,10 +1,3 @@
-package online.kruzhok.domain.base
-
-import kotlinx.coroutines.*
-import online.kruzhok.domain.base.type.Either
-import online.kruzhok.domain.base.type.Failure
-import kotlin.coroutines.CoroutineContext
-
 abstract class UseCase<out Type, in Params> {
     private var backgroundContext: CoroutineContext = Dispatchers.IO
     private var foregroundContext: CoroutineContext = Dispatchers.Main
